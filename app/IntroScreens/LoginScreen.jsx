@@ -37,11 +37,12 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
-    <LinearGradient
-      colors={['#0C1B33', '#1A274D', '#243B55']} // Gradient colors from bottom to top
-      style={LoginStyles.container}
-    >
-      <View style={LoginStyles.container}>
+      <View style={[LoginStyles.container, { backgroundColor: '#413D51' }]}>
+      <Image 
+      source={require('../../assets/images/pill.png')}  // Replace with the actual path to your image
+      style={LoginStyles.image}
+      />
+      <Text style={LoginStyles.header}>Hello and welcome to PillPal, Let's get acquainted</Text>
         {loading ? (
           <ActivityIndicator size="large" color="#00ff00" />
         ) : (
@@ -77,6 +78,5 @@ export default function LoginScreen({ navigation }) {
           </>
         )}
       </View>
-    </LinearGradient>
   );
 }

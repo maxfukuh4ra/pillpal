@@ -22,7 +22,7 @@ const LoginStyles = StyleSheet.create({
     color: 'white'
   },
   button: {
-    backgroundColor: '#1A274D',
+    backgroundColor: '#FEA09E',
     paddingVertical: 12, 
     paddingHorizontal: 30,
     borderRadius: 5,
@@ -51,7 +51,7 @@ const LoginStyles = StyleSheet.create({
     width: '100%',
     alignItems: 'flex-end',
     marginBottom: 20,
-    marginLeft: 160,
+    marginLeft: -125,
   },
   forgotPasswordText: {
     color: '#C0C0C0',
@@ -70,6 +70,7 @@ const LoginStyles = StyleSheet.create({
   },
   header: {
     fontFamily: 'raleway-bold',
+    color: '#FFFBFB',
     fontSize: 28, // Increase size for a larger, more noticeable header
     marginBottom: 20, // Add margin for spacing
     textAlign: 'center',
