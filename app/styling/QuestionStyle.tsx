@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-  },
+    backgroundColor: '#413D51',
+  },  
   header: {
     fontSize: 20,
     color: '#ffffff',
@@ -14,7 +15,7 @@ const styles = StyleSheet.create({
     fontFamily: 'raleway-bold',  
   },
   optionButton: {
-    backgroundColor: '#243B55',
+    backgroundColor: '#BFBFBF',
     margin: 5,
     padding: 15,
     borderRadius: 10,
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
   },
   navigationButton: {
-    backgroundColor: '#243B55',
+    backgroundColor: '#BFBFBF',
     padding: 15,
     borderRadius: 10,
     width: '45%', 
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
   },
   input: {
     width: '90%',
-    backgroundColor: '#243B55',
+    backgroundColor: '#BFBFBF',
     borderRadius: 10,
     padding: 15,
     fontSize: 16,

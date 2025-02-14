@@ -37,7 +37,7 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
-      <View style={[LoginStyles.container, { backgroundColor: '#413D51' }]}>
+      <View style={LoginStyles.container}>
       <Image 
       source={require('../../assets/images/pill.png')}  // Replace with the actual path to your image
       style={LoginStyles.image}

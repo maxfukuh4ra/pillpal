@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     alignItems: 'center',
-    marginBottom: -30,
+    marginBottom: 10,
     marginTop: 50,
   },
   progressText: {
@@ -36,6 +36,6 @@ const styles = StyleSheet.create({
   },
   progressBar: {
     height: '100%',
-    backgroundColor: 'green',
+    backgroundColor: '#49F2E3',
   },
 });

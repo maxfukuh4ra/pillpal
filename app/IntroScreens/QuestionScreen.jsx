@@ -63,20 +63,17 @@ export default function QuestionScreen() {
   };
 
   return (
-    <LinearGradient
-      colors={['#0C1B33', '#1A274D', '#243B55']} 
-      style={styles.container}
-    >
+    <View style={styles.container}>
       <ProgressBar currentStep={currentStep + 1} totalSteps={totalSteps} />
-      {currentStep === 0 && <EmailPasswordQuestion onNext={handleNext} onBack = {handleBack}/>}
-      {currentStep === 1 && <NameQuestion onNext={handleNext} onBack = {handleBack}/>}
-      {currentStep === 2 && <UserGoalQuestion onNext={handleNext} onBack = {handleBack}/>}
+      {currentStep === 0 && <EmailPasswordQuestion onNext={handleNext} onBack={handleBack} />}
+      {currentStep === 1 && <NameQuestion onNext={handleNext} onBack={handleBack} />}
+      {currentStep === 2 && <UserGoalQuestion onNext={handleNext} onBack={handleBack} />}
       {currentStep === 3 && <ExerciseQuestion onNext={handleNext} onBack={handleBack} />}
       {currentStep === 4 && <MealsQuestion onNext={handleNext} onBack={handleBack} />}
       {currentStep === 5 && <AllergiesQuestion onNext={handleNext} onBack={handleBack} />}
       {currentStep === 6 && <DietaryRestrictionsQuestion onNext={handleNext} onBack={handleBack} />}
       {currentStep === 7 && <PreferredCuisinesQuestion onNext={handleNext} onBack={handleBack} />}
       {currentStep === 8 && <IntensityQuestion onNext={handleNext} onBack={handleBack} />}
-    </LinearGradient>
-  );
+    </View>
+  );  
 }
