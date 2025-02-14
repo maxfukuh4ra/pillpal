@@ -5,8 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import { createUserWithEmailAndPassword } from 'firebase/auth'; 
 import { FIREBASE_AUTH } from '../../firebaseconfig';
 
-import UserGoalQuestion from '../Questions/UserGoalQuestion';
-import ExerciseQuestion from '../Questions/ExerciseQuestion';
+import MedicationCountQuestion from '../Questions/MedicationCountQuestion';
+import MedicationDetailsQuestion from '../Questions/MedicationDetailsQuestion';
 import MealsQuestion from '../Questions/MealsQuestion';
 import AllergiesQuestion from '../Questions/AllergiesQuestion';
 import DietaryRestrictionsQuestion from '../Questions/DietaryRestrictionsQuestion';
@@ -24,7 +24,7 @@ export default function QuestionScreen() {
   const navigation = useNavigation(); 
   const auth = FIREBASE_AUTH;
 
-  const totalSteps = 9;
+  const totalSteps = 4;
 
   // called when clicked next button
   const handleNext = async (key, value) => {
@@ -33,7 +33,7 @@ export default function QuestionScreen() {
     setResponses(prevResponses => ({ ...prevResponses, [key]: value }));
 
     // debug
-    // console.log('Responses so far:', responses);
+    console.log('Responses so far:', responses);
 
     // if the user has answered the last question
     if (currentStep + 1 >= totalSteps) {
@@ -67,8 +67,9 @@ export default function QuestionScreen() {
       <ProgressBar currentStep={currentStep + 1} totalSteps={totalSteps} />
       {currentStep === 0 && <EmailPasswordQuestion onNext={handleNext} onBack={handleBack} />}
       {currentStep === 1 && <NameQuestion onNext={handleNext} onBack={handleBack} />}
-      {currentStep === 2 && <UserGoalQuestion onNext={handleNext} onBack={handleBack} />}
-      {currentStep === 3 && <ExerciseQuestion onNext={handleNext} onBack={handleBack} />}
+      {currentStep === 2 && <MedicationCountQuestion onNext={handleNext} onBack={handleBack} />}
+      {currentStep === 3 && responses.medicationCount !== undefined && (
+      <MedicationDetailsQuestion medicationCount={responses.medicationCount} onNext={handleNext} onBack={handleBack} /> )}
       {currentStep === 4 && <MealsQuestion onNext={handleNext} onBack={handleBack} />}
       {currentStep === 5 && <AllergiesQuestion onNext={handleNext} onBack={handleBack} />}
       {currentStep === 6 && <DietaryRestrictionsQuestion onNext={handleNext} onBack={handleBack} />}
