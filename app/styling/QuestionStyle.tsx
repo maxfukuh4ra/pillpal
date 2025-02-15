@@ -14,24 +14,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontFamily: 'raleway-bold',  
   },
-  optionButton: {
-    backgroundColor: '#BFBFBF',
-    margin: 5,
-    padding: 15,
-    borderRadius: 10,
-    width: '90%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  optionButtonSelected: {
-    backgroundColor: 'green',
-  },
-  optionText: {
+  subHeader: {
+    fontSize: 16,
     color: '#ffffff',
-    fontSize: 18,
-    textAlign: 'center',
-    flex: 1,
+    marginBottom: 5,
     fontFamily: 'raleway-regular',
   },
   navigationContainer: {
@@ -65,7 +51,47 @@ const styles = StyleSheet.create({
   },
   dateText: {
     color: 'white',
-  }
+  },
+  rowContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    marginVertical: 10,
+  },
+  chipWrapper: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  pickerContainer: {
+    borderRadius: 10,
+    justifyContent: 'center',
+    backgroundColor: '#BFBFBF',
+  },
+  picker: {
+    width: '100%',
+    height: 50,
+    color: 'white',
+  },
+  chipContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  chip: {
+    backgroundColor: '#BFBFBF',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    marginHorizontal: 5,
+    borderRadius: 20,
+  },
+  chipSelected: {
+    backgroundColor: '#49F2E3',
+  },
+  chipText: {
+    color: 'white',
+    fontSize: 16,
+    fontFamily: 'raleway-bold',
+  },
 });
 
 export default styles;
