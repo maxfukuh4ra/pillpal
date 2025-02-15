@@ -63,6 +63,33 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'raleway-bold',   
   },
+  image: {
+    width: 120, 
+    height: 120, 
+    marginBottom: 20,
+  },
+  descriptionText: {
+    fontSize: 16,
+    color: '#ffffff',
+    textAlign: 'center',
+    marginBottom: 15,
+    fontFamily: 'raleway-regular',
+    paddingHorizontal: 20,
+  },
+  permissionButton: {
+    backgroundColor: '#ffffff',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+    marginVertical: 8,
+    width: '80%',
+    alignItems: 'center',
+  },
+  permissionButtonText: {
+    color: '#000000',
+    fontSize: 16,
+    fontFamily: 'raleway-bold',
+  },
 });
 
 export default styles;

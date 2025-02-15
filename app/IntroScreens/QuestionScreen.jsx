@@ -7,7 +7,7 @@ import { FIREBASE_AUTH } from '../../firebaseconfig';
 
 import MedicationCountQuestion from '../Questions/MedicationCountQuestion';
 import MedicationDetailsQuestion from '../Questions/MedicationDetailsQuestion';
-import MealsQuestion from '../Questions/MealsQuestion';
+import PrivacyQuestion from '../Questions/PrivacyQuestion';
 import AllergiesQuestion from '../Questions/AllergiesQuestion';
 import DietaryRestrictionsQuestion from '../Questions/DietaryRestrictionsQuestion';
 import PreferredCuisinesQuestion from '../Questions/PreferredCuisinesQuestion';
@@ -24,7 +24,7 @@ export default function QuestionScreen() {
   const navigation = useNavigation(); 
   const auth = FIREBASE_AUTH;
 
-  const totalSteps = 4;
+  const totalSteps = 5;
 
   // called when clicked next button
   const handleNext = async (key, value) => {
@@ -70,7 +70,7 @@ export default function QuestionScreen() {
       {currentStep === 2 && <MedicationCountQuestion onNext={handleNext} onBack={handleBack} />}
       {currentStep === 3 && responses.medicationCount !== undefined && (
       <MedicationDetailsQuestion medicationCount={responses.medicationCount} onNext={handleNext} onBack={handleBack} /> )}
-      {currentStep === 4 && <MealsQuestion onNext={handleNext} onBack={handleBack} />}
+      {currentStep === 4 && <PrivacyQuestion onNext={handleNext} onBack={handleBack} />}
       {currentStep === 5 && <AllergiesQuestion onNext={handleNext} onBack={handleBack} />}
       {currentStep === 6 && <DietaryRestrictionsQuestion onNext={handleNext} onBack={handleBack} />}
       {currentStep === 7 && <PreferredCuisinesQuestion onNext={handleNext} onBack={handleBack} />}
