@@ -15,9 +15,33 @@ const styles = StyleSheet.create({
     fontFamily: 'raleway-bold',  
   },
   subHeader: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#ffffff',
     marginBottom: 5,
+    fontFamily: 'raleway-regular',
+  },
+  medicationRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    marginVertical: 10,
+  },
+  medicationInputWrapper: {
+    flex: 2,
+    marginRight: 10,
+  },
+  timesInputWrapper: {
+    flex: 1,
+  },
+  input: {
+    backgroundColor: '#BFBFBF',
+    borderRadius: 10,
+    padding: 10,
+    fontSize: 16,
+    color: 'black',
+    textAlign: 'center',
+    marginVertical: 5,
     fontFamily: 'raleway-regular',
   },
   navigationContainer: {
@@ -38,59 +62,6 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontSize: 16,
     fontFamily: 'raleway-bold',   
-  },
-  input: {
-    width: '90%',
-    backgroundColor: '#BFBFBF',
-    borderRadius: 10,
-    padding: 15,
-    fontSize: 16,
-    color: 'white',
-    marginVertical: 10,
-    fontFamily: 'raleway-regular',
-  },
-  dateText: {
-    color: 'white',
-  },
-  rowContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '100%',
-    marginVertical: 10,
-  },
-  chipWrapper: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  pickerContainer: {
-    borderRadius: 10,
-    justifyContent: 'center',
-    backgroundColor: '#BFBFBF',
-  },
-  picker: {
-    width: '100%',
-    height: 50,
-    color: 'white',
-  },
-  chipContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  chip: {
-    backgroundColor: '#BFBFBF',
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    marginHorizontal: 5,
-    borderRadius: 20,
-  },
-  chipSelected: {
-    backgroundColor: '#49F2E3',
-  },
-  chipText: {
-    color: 'white',
-    fontSize: 16,
-    fontFamily: 'raleway-bold',
   },
 });
 
