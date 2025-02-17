@@ -1,67 +1,100 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Modal, StyleSheet } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-
-import Calendar from './Calendar';
+import React from 'react';
+import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { MaterialCommunityIcons } from '@expo/vector-icons'; // Import icon
 import styles from '../styling/DashboardStyle';
+import BottomNavBar from '../BottomNavBar';
 
-import ExpandableCard from './ExpandableCard';
+const medications = [
+  {
+    id: '1',
+    name: 'Aspirin',
+    dosage: 'ASS, 500mg',
+    brand: 'BAYER, coated pills',
+    frequency: '2x Daily',
+    reminders: ['6:00a - 8:30a', '5:00p - 7:00p'],
+    image: require('../../assets/images/aspirin.png'),
+    backgroundColor: '#F8C5C1', // Light red background
+  },
+  {
+    id: '2',
+    name: 'Omeprazole',
+    dosage: 'Prilosec, 20mg',
+    brand: 'AstraZeneca, capsule',
+    frequency: '1x Daily',
+    reminders: ['5:00p - 7:00p'],
+    image: require('../../assets/images/omeprazole.png'),
+    backgroundColor: '#A7E8F3', // Light blue background
+  },
+];
 
 export default function Dashboard() {
-  return (
-    <LinearGradient colors={['#0C1B33', '#1A274D', '#243B55']} style={styles.gradientBackground}>
-      <View style={styles.container}>
-        <Calendar />
+  const handleEditReminder = (medicationId) => {
+    console.log(`Editing reminders for medication ID: ${medicationId}`);
+    // Add navigation or modal functionality to edit reminders
+  };
 
-        
-        <View style={styles.gridContainer}>
-          {/* Row 1 */}
-          <View style={styles.row}>
-            <ExpandableCard
-              title="Food"
-              value="2,000"
-              description="Calories"
-              color="#F6AE2D"
-              iconName="fast-food" 
-              additionalContent={
-                <Text style={styles.additionalText}>Last Meal: In-N-Out Burger 1000 Calories</Text>
-              }
-            />
-            <ExpandableCard
-              title="Activity"
-              value="30"
-              description="Minutes"
-              color="#4D9DE0"
-              iconName="barbell"
-              additionalContent={
-                <Text style={styles.additionalText}>1000 Calories burned from activity</Text>
-              }
-            />
-          </View>
-          
-          {/* Row 2 */}
-          <View style={styles.row}>
-            <ExpandableCard
-              title="Weight"
-              value="190"
-              description="Pounds"
-              color="#90BE6D"
-              iconName="body"
-              additionalContent={
-                <Text style={styles.additionalText}>+10 pounds from the day before</Text>
-              }
-            />
-            <ExpandableCard
-              title="Macros"
-              value= ""
-              description={["Carbs: 30g", "Proteins: 20g", "Fats: 50g", "Fiber: 10g"]} 
-              color="#ff5c8a"
-              iconName="nutrition"
-              additionalContent={null}
-            />
-          </View>
+  return (
+    <SafeAreaView style={styles.safeContainer}>
+      <View style={styles.container}>
+        {/* Header */}
+        <View style={styles.header}>
+          <Text style={styles.title}>Dashboard</Text>
+          <Image source={require('../../assets/images/pill.png')} style={styles.icon} />
         </View>
+
+        {/* Weekly Summary */}
+        <View style={styles.summaryContainer}>
+          <View style={styles.summaryCard}>
+            <Text style={styles.summaryTitle}>Your week</Text>
+          </View>
+          <View style={styles.summaryCard}></View>
+        </View>
+
+        {/* Today's Medications */}
+        <Text style={styles.sectionTitle}>Today's Medications</Text>
+        <FlatList
+          data={medications}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <View style={styles.medicationCard}>
+              {/* Medication Info */}
+              <View style={styles.medicationInfo}>
+                <Text style={styles.medicationName}>{item.name}</Text>
+                <Text style={styles.medicationDetails}>{item.dosage}</Text>
+                <Text style={styles.medicationDetails}>{item.brand}</Text>
+                <Text style={styles.medicationFrequency}>{item.frequency}</Text>
+
+                {/* Reminders Section */}
+                <View style={styles.reminderContainer}>
+                  <View>
+                    <Text style={styles.remindersTitle}>Reminders</Text>
+                    {item.reminders.map((time, index) => (
+                      <Text key={index} style={styles.reminderText}>{time}</Text>
+                    ))}
+                  </View>
+
+                  {/* Edit Reminder Button */}
+                  <TouchableOpacity 
+                    onPress={() => handleEditReminder(item.id)} 
+                    style={styles.editButton}
+                  >
+                    <MaterialCommunityIcons name="pencil" size={20} color="#555" />
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              {/* Medication Image (with background) */}
+              <View style={[styles.medicationImageContainer, { backgroundColor: item.backgroundColor }]}>
+                <Image source={item.image} style={styles.medicationImage} />
+              </View>
+            </View>
+          )}
+        />
+
+        {/* Bottom Navigation */}
+        <BottomNavBar />
       </View>
-    </LinearGradient>
+    </SafeAreaView>
   );
 }

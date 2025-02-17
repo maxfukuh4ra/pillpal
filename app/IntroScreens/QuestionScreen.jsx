@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient'; 
+import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; 
 import { createUserWithEmailAndPassword } from 'firebase/auth'; 
 import { FIREBASE_AUTH } from '../../firebaseconfig';
@@ -8,15 +7,10 @@ import { FIREBASE_AUTH } from '../../firebaseconfig';
 import MedicationCountQuestion from '../Questions/MedicationCountQuestion';
 import MedicationDetailsQuestion from '../Questions/MedicationDetailsQuestion';
 import PrivacyQuestion from '../Questions/PrivacyQuestion';
-import AllergiesQuestion from '../Questions/AllergiesQuestion';
-import DietaryRestrictionsQuestion from '../Questions/DietaryRestrictionsQuestion';
-import PreferredCuisinesQuestion from '../Questions/PreferredCuisinesQuestion';
-import IntensityQuestion from '../Questions/IntensityQuestion';
 import EmailPasswordQuestion from '../Questions/EmailandPassword';
 import NameQuestion from '../Questions/NameQuestion';
 import styles from "../styling/QuestionStyle";
 import ProgressBar from '../Questions/ProgressBar';
-
 
 export default function QuestionScreen() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -26,40 +20,30 @@ export default function QuestionScreen() {
 
   const totalSteps = 5;
 
-  // called when clicked next button
   const handleNext = async (key, value) => {
-    // update responses state with user's answer
-    // setResponses({ ...responses, [key]: value });
     setResponses(prevResponses => ({ ...prevResponses, [key]: value }));
 
-    // debug
     console.log('Responses so far:', responses);
 
-    // if the user has answered the last question
     if (currentStep + 1 >= totalSteps) {
       try {
         const email = responses.email;
-        const password = responses.password
-
-        // // debug
-        // console.log("Creating account with email:", email);
-        // console.log("Password:", password);
+        const password = responses.password;
 
         const response = await createUserWithEmailAndPassword(auth, email, password);
-        // some implementation to send email for user to 2-factor authentication
-        navigation.navigate('Dashboard');
+        console.log("✅ Account Created Successfully");
+        navigation.replace('Dashboard');
       } catch (error) {
         alert('Error creating account. Please try again.');
-        console.error("Error creating account: ", error.message);
+        console.error("❌ Error creating account: ", error.message);
       }
     } else {
       setCurrentStep(currentStep + 1); 
     }
   };
 
-  // called when clicked back button
   const handleBack = () => {
-    setCurrentStep(currentStep - 1); // move to the previous question
+    setCurrentStep(currentStep - 1);
   };
 
   return (
@@ -69,12 +53,9 @@ export default function QuestionScreen() {
       {currentStep === 1 && <NameQuestion onNext={handleNext} onBack={handleBack} />}
       {currentStep === 2 && <MedicationCountQuestion onNext={handleNext} onBack={handleBack} />}
       {currentStep === 3 && responses.medicationCount !== undefined && (
-      <MedicationDetailsQuestion medicationCount={responses.medicationCount} onNext={handleNext} onBack={handleBack} /> )}
+        <MedicationDetailsQuestion medicationCount={responses.medicationCount} onNext={handleNext} onBack={handleBack} />
+      )}
       {currentStep === 4 && <PrivacyQuestion onNext={handleNext} onBack={handleBack} />}
-      {currentStep === 5 && <AllergiesQuestion onNext={handleNext} onBack={handleBack} />}
-      {currentStep === 6 && <DietaryRestrictionsQuestion onNext={handleNext} onBack={handleBack} />}
-      {currentStep === 7 && <PreferredCuisinesQuestion onNext={handleNext} onBack={handleBack} />}
-      {currentStep === 8 && <IntensityQuestion onNext={handleNext} onBack={handleBack} />}
     </View>
   );  
 }
