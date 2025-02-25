@@ -14,7 +14,7 @@ const medications = [
     frequency: '2x Daily',
     reminders: ['6:00a - 8:30a', '5:00p - 7:00p'],
     image: require('../../assets/images/aspirin.png'),
-    backgroundColor: '#F8C5C1', // Light red background
+    backgroundColor: '#F8C5C1', 
   },
   {
     id: '2',
@@ -24,7 +24,7 @@ const medications = [
     frequency: '1x Daily',
     reminders: ['5:00p - 7:00p'],
     image: require('../../assets/images/omeprazole.png'),
-    backgroundColor: '#A7E8F3', // Light blue background
+    backgroundColor: '#A7E8F3', 
   },
 ];
 
