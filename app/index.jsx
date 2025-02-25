@@ -1,9 +1,7 @@
-// Handles navigation between screens
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';  // Import NavigationContainer
 import { createStackNavigator } from '@react-navigation/stack';
 
-// Import screens
 import LoginScreen from './IntroScreens/LoginScreen';
 import QuestionScreen from './IntroScreens/QuestionScreen';
 import ForgotPasswordScreen from './IntroScreens/ForgotScreen';
