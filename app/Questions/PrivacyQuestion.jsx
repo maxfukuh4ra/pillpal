@@ -9,14 +9,14 @@ export default function PrivacyQuestion({ onNext, onBack }) {
   const [notificationStatus, setNotificationStatus] = useState(null);
   const [location, setLocation] = useState(null);
 
-  // Function to request location permission
+  // function to request location permission
   const handleLocationPermission = async () => {
     const { status } = await Location.requestForegroundPermissionsAsync();
     setLocationStatus(status);
 
     if (status === 'granted') {
       console.log("✅ Location permission granted");
-      // Start tracking location
+      // start tracking location
       const locationSubscription = await Location.watchPositionAsync(
         { accuracy: Location.Accuracy.High, timeInterval: 5000, distanceInterval: 10 },
         (newLocation) => {
@@ -34,7 +34,7 @@ export default function PrivacyQuestion({ onNext, onBack }) {
     }
   };
 
-  // Function to request notification permission
+  // function to request notification permission
   const handleNotificationPermission = async () => {
     const { status } = await Notifications.requestPermissionsAsync();
     setNotificationStatus(status);
@@ -42,13 +42,13 @@ export default function PrivacyQuestion({ onNext, onBack }) {
     if (status === 'granted') {
       console.log("✅ Notification permission granted");
 
-      // Schedule a test notification after permission is granted
+      // schedule a test notification after permission is granted
       await Notifications.scheduleNotificationAsync({
         content: {
           title: "Reminder",
           body: "Don't forget to take your medication!",
         },
-        trigger: { seconds: 10 }, // Sends a notification after 10 seconds
+        trigger: { seconds: 10 }, // sends a notification after 10 seconds
       });
     } else {
       Alert.alert(
