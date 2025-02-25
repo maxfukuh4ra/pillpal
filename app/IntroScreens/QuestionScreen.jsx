@@ -26,11 +26,14 @@ export default function QuestionScreen() {
     setResponses(updatedResponses); // Update state with the new data
   
     console.log('Responses so far:', updatedResponses); // This will now show the latest data
+
+    console.log(updatedResponses.email);
+    console.log(updatedResponses.password);
   
     if (currentStep + 1 >= totalSteps) {
       try {
-        const email = updatedResponses.email;
-        const password = updatedResponses.password;
+        const email = updatedResponses.credentials?.email;
+        const password = updatedResponses.credentials?.password;
   
         // Create user account
         const response = await createUserWithEmailAndPassword(auth, email, password);

@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, Text, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import LoginStyles from '../styling/LoginStyles';
-import { LinearGradient } from 'expo-linear-gradient'; 
 import { FIREBASE_AUTH } from '../../firebaseconfig';
 import { signInWithEmailAndPassword } from 'firebase/auth'
 
