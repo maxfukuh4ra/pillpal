@@ -9,9 +9,16 @@ export default function EmailPassword({ onNext }) {
     const navigation = useNavigation();  
 
     const handleNext = () => {
-        onNext('email', email);
-        onNext('password', password);
-    };
+        // Pass both email and password together in one update
+        const combinedData = {
+          email: email,
+          password: password
+        };
+      
+        // Update the responses object all at once
+        onNext('credentials', combinedData);
+      };
+      
 
     const handleBack = () => {
         navigation.navigate('LoginScreen');  

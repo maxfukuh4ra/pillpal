@@ -16,7 +16,7 @@ const NameBirthday = ({ onNext, onBack }) => {
     if (event.type === 'set') {
       setBirthday(selectedDate);
     }
-    setShowPicker(false); // Hide the picker after selection
+    setShowPicker(false); 
   };
 
   return (
@@ -58,7 +58,7 @@ const NameBirthday = ({ onNext, onBack }) => {
         <TouchableOpacity
           onPress={handleNext}
           style={styles.navigationButton}
-          disabled={!name || !birthday}  // Disable button if name or birthday is not set
+          disabled={!name || !birthday}  
         >
           <Text style={styles.nextButtonText}>Next</Text>
         </TouchableOpacity>

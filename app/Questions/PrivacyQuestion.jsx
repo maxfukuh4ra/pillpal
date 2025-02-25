@@ -3,20 +3,20 @@ import { View, Text, TouchableOpacity, Image, Alert } from 'react-native';
 import * as Location from 'expo-location';
 import * as Notifications from 'expo-notifications';
 import styles from '../styling/QuestionStyle';
+import { submitUserData } from '../services/SubmitUserData';
 
-export default function PrivacyQuestion({ onNext, onBack }) {
+export default function PrivacyQuestion({ onNext, onBack, userData }) {
   const [locationStatus, setLocationStatus] = useState(null);
   const [notificationStatus, setNotificationStatus] = useState(null);
   const [location, setLocation] = useState(null);
 
-  // function to request location permission
+  // Function to request location permission
   const handleLocationPermission = async () => {
     const { status } = await Location.requestForegroundPermissionsAsync();
     setLocationStatus(status);
 
     if (status === 'granted') {
       console.log("✅ Location permission granted");
-      // start tracking location
       const locationSubscription = await Location.watchPositionAsync(
         { accuracy: Location.Accuracy.High, timeInterval: 5000, distanceInterval: 10 },
         (newLocation) => {
@@ -34,7 +34,7 @@ export default function PrivacyQuestion({ onNext, onBack }) {
     }
   };
 
-  // function to request notification permission
+  // Function to request notification permission
   const handleNotificationPermission = async () => {
     const { status } = await Notifications.requestPermissionsAsync();
     setNotificationStatus(status);
@@ -42,13 +42,13 @@ export default function PrivacyQuestion({ onNext, onBack }) {
     if (status === 'granted') {
       console.log("✅ Notification permission granted");
 
-      // schedule a test notification after permission is granted
+      // Schedule a test notification
       await Notifications.scheduleNotificationAsync({
         content: {
           title: "Reminder",
           body: "Don't forget to take your medication!",
         },
-        trigger: { seconds: 10 }, // sends a notification after 10 seconds
+        trigger: { seconds: 10 },
       });
     } else {
       Alert.alert(
@@ -59,19 +59,42 @@ export default function PrivacyQuestion({ onNext, onBack }) {
     }
   };
 
+  const handleSubmit = async () => {
+    console.log("User data received in PrivacyQuestion: ", userData);
+
+    // flatten nested objects before submitting to Firestore
+    const finalUserData = {
+      email: userData.credentials?.email,
+      password: userData.credentials?.password,
+      name: userData.nameBirthday?.name,
+      birthday: userData.nameBirthday?.birthday,
+      medicationCount: userData.medicationCount,
+      medications: userData.medications,
+      location: location ? {
+        latitude: location.latitude,
+        longitude: location.longitude
+      } : null,
+      notificationsEnabled: notificationStatus === 'granted',
+      locationPermissionGranted: locationStatus === 'granted',
+    };
+  
+    try {
+      await submitUserData(finalUserData); // call the function to send flattened data to Firestore
+      console.log("User data submitted successfully with all responses");
+      onNext('permissionsGranted', true); // proceed to the next screen
+    } catch (error) {
+      console.error("Error submitting user data: ", error);
+    }
+  };
+  
+
+
   return (
     <View style={styles.container}>
-      {/* Medical Character Image */}
-      <Image 
-        source={require('../../assets/images/pill.png')} 
-        style={styles.image}
-      />
-
-      {/* Privacy and Consent Text */}
+      <Image source={require('../../assets/images/pill.png')} style={styles.image} />
       <Text style={styles.descriptionText}>
         Your comfort comes first; we guarantee your privacy, and we want to improve your experience.
       </Text>
-
       <Text style={styles.descriptionText}>
         To offer the full functionality of our app, we need your consent to share your location and receive push notifications.
       </Text>
@@ -95,9 +118,9 @@ export default function PrivacyQuestion({ onNext, onBack }) {
           <Text style={styles.nextButtonText}>Back</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity 
-          onPress={() => onNext('permissionsGranted', true)} 
-          style={styles.navigationButton} 
+        <TouchableOpacity
+          onPress={handleSubmit}
+          style={styles.navigationButton}
           disabled={!(locationStatus === 'granted' && notificationStatus === 'granted')}
         >
           <Text style={styles.nextButtonText}>Next</Text>

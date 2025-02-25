@@ -21,26 +21,32 @@ export default function QuestionScreen() {
   const totalSteps = 5;
 
   const handleNext = async (key, value) => {
-    setResponses(prevResponses => ({ ...prevResponses, [key]: value }));
-
-    console.log('Responses so far:', responses);
-
+    // Construct the updated responses immediately
+    const updatedResponses = { ...responses, [key]: value };
+    setResponses(updatedResponses); // Update state with the new data
+  
+    console.log('Responses so far:', updatedResponses); // This will now show the latest data
+  
     if (currentStep + 1 >= totalSteps) {
       try {
-        const email = responses.email;
-        const password = responses.password;
-
+        const email = updatedResponses.email;
+        const password = updatedResponses.password;
+  
+        // Create user account
         const response = await createUserWithEmailAndPassword(auth, email, password);
         console.log("✅ Account Created Successfully");
+  
+        // Navigate to Dashboard only after successful account creation
         navigation.replace('Dashboard');
       } catch (error) {
         alert('Error creating account. Please try again.');
         console.error("❌ Error creating account: ", error.message);
       }
     } else {
-      setCurrentStep(currentStep + 1); 
+      setCurrentStep(currentStep + 1); // Move to the next question
     }
   };
+  
 
   const handleBack = () => {
     setCurrentStep(currentStep - 1);
@@ -55,7 +61,7 @@ export default function QuestionScreen() {
       {currentStep === 3 && responses.medicationCount !== undefined && (
         <MedicationDetailsQuestion medicationCount={responses.medicationCount} onNext={handleNext} onBack={handleBack} />
       )}
-      {currentStep === 4 && <PrivacyQuestion onNext={handleNext} onBack={handleBack} />}
+      {currentStep === 4 && <PrivacyQuestion onNext={handleNext} onBack={handleBack} userData={responses} />}
     </View>
   );  
 }
