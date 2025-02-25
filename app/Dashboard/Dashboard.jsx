@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; // Import icon
@@ -29,9 +30,17 @@ const medications = [
 ];
 
 export default function Dashboard() {
-  const handleEditReminder = (medicationId) => {
-    console.log(`Editing reminders for medication ID: ${medicationId}`);
-    // Add navigation or modal functionality to edit reminders
+  const navigation = useNavigation();
+
+  const handleEditReminder = (medication) => {
+    console.log(`Editing reminders for medication: ${medication.name}`);
+    navigation.navigate('EditIntention', {
+      medicationName: medication.name,
+      dosage: medication.dosage,
+      brand: medication.brand,
+      frequency: medication.frequency,
+      reminders: medication.reminders,
+    });
   };
 
   return (
@@ -76,7 +85,7 @@ export default function Dashboard() {
 
                   {/* Edit Reminder Button */}
                   <TouchableOpacity 
-                    onPress={() => handleEditReminder(item.id)} 
+                    onPress={() => handleEditReminder(item)} 
                     style={styles.editButton}
                   >
                     <MaterialCommunityIcons name="pencil" size={20} color="#555" />
