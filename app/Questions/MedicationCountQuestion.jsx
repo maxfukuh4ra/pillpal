@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
-import styles from '../styling/QuestionStyle';
+import React, { useState } from 'react'
+import { View, Text, TextInput, TouchableOpacity } from 'react-native'
+import styles from '../styling/QuestionStyle'
 
 export default function MedicationCountQuestion({ onNext, onBack }) {
-  const [medCount, setMedCount] = useState('');
+  const [medCount, setMedCount] = useState('')
 
   const handleNext = () => {
-    const count = parseInt(medCount, 10);
+    const count = parseInt(medCount, 10)
     if (!isNaN(count) && count > 0) {
-      onNext('medicationCount', count);
+      onNext('medicationCount', count)
     }
-  };
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.header}>How many medications do you take?</Text>
@@ -35,5 +35,5 @@ export default function MedicationCountQuestion({ onNext, onBack }) {
         </TouchableOpacity>
       </View>
     </View>
-  );
+  )
 }

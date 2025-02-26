@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import styles from '../styling/QuestionStyle';
+import React, { useState } from 'react'
+import { View, Text, TextInput, TouchableOpacity } from 'react-native'
+import DateTimePicker from '@react-native-community/datetimepicker'
+import styles from '../styling/QuestionStyle'
 
 const NameBirthday = ({ onNext, onBack }) => {
-  const [name, setName] = useState('');
-  const [birthday, setBirthday] = useState(new Date());
-  const [showPicker, setShowPicker] = useState(false);
+  const [name, setName] = useState('')
+  const [birthday, setBirthday] = useState(new Date())
+  const [showPicker, setShowPicker] = useState(false)
 
   const handleNext = () => {
-    onNext('nameBirthday', { name, birthday });
-  };
+    onNext('nameBirthday', { name, birthday })
+  }
 
   const onChange = (event, selectedDate) => {
     if (event.type === 'set') {
-      setBirthday(selectedDate);
+      setBirthday(selectedDate)
     }
-    setShowPicker(false); 
-  };
+    setShowPicker(false)
+  }
 
   return (
     <View style={styles.container}>
@@ -33,9 +33,12 @@ const NameBirthday = ({ onNext, onBack }) => {
       />
 
       {/* Birthday Picker */}
-      <TouchableOpacity onPress={() => setShowPicker(true)} style={styles.input}>
+      <TouchableOpacity
+        onPress={() => setShowPicker(true)}
+        style={styles.input}
+      >
         <Text style={styles.dateText}>
-          {birthday ? birthday.toLocaleDateString() : "Select your Birthday"}
+          {birthday ? birthday.toLocaleDateString() : 'Select your Birthday'}
         </Text>
       </TouchableOpacity>
 
@@ -45,7 +48,7 @@ const NameBirthday = ({ onNext, onBack }) => {
           mode="date"
           display="default"
           onChange={onChange}
-          maximumDate={new Date()}  // Disallow future dates
+          maximumDate={new Date()} // Disallow future dates
         />
       )}
 
@@ -58,13 +61,13 @@ const NameBirthday = ({ onNext, onBack }) => {
         <TouchableOpacity
           onPress={handleNext}
           style={styles.navigationButton}
-          disabled={!name || !birthday}  
+          disabled={!name || !birthday}
         >
           <Text style={styles.nextButtonText}>Next</Text>
         </TouchableOpacity>
       </View>
     </View>
-  );
-};
+  )
+}
 
-export default NameBirthday;
+export default NameBirthday

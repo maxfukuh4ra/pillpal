@@ -16,7 +16,6 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
     npx expo start
    ```
 
-
 ## Join the community
 
 Join our community of developers creating universal apps.

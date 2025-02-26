@@ -3,15 +3,35 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     }
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-, "app/Dashboard/ExpandableCard.jsx", "app/index.jsx", "app/_layout.jsx", "app/Questions/MedicationCountQuestion.jsx", "app/IntroScreens/LoginStyles.js", "app/IntroScreens/QuestionScreen.jsx", "app/IntroScreens/LoginScreen.tsx", "app/IntroScreens/ForgotScreen.jsx", "app/index.jsx", "app/_layout.jsx", "app/Questions/MedicationCountQuestion.jsx", "app/Questions/ProgressBar.jsx", "app/Questions/PreferredCuisinesQuestion.jsx", "app/Questions/PrivacyQuestion.jsx", "app/Questions/IntensityQuestion.jsx", "app/Questions/MedicationDetailsQuestion.jsx", "app/Questions/DietaryRestrictionsQuestion.jsx", "app/Questions/AllergiesQuestion.jsx", "app/Dashboard/Calendar.jsx", "app/Dashboard/Dashboard.jsx", "app/Dashboard/ExpandableCard.jsx", "app/IntroScreens/CreateAccScreen.jsx"  ]
+    "expo-env.d.ts",
+    "app/Dashboard/ExpandableCard.jsx",
+    "app/index.jsx",
+    "app/_layout.jsx",
+    "app/Questions/MedicationCountQuestion.jsx",
+    "app/IntroScreens/LoginStyles.js",
+    "app/IntroScreens/QuestionScreen.jsx",
+    "app/IntroScreens/LoginScreen.tsx",
+    "app/IntroScreens/ForgotScreen.jsx",
+    "app/index.jsx",
+    "app/_layout.jsx",
+    "app/Questions/MedicationCountQuestion.jsx",
+    "app/Questions/ProgressBar.jsx",
+    "app/Questions/PreferredCuisinesQuestion.jsx",
+    "app/Questions/PrivacyQuestion.jsx",
+    "app/Questions/IntensityQuestion.jsx",
+    "app/Questions/MedicationDetailsQuestion.jsx",
+    "app/Questions/DietaryRestrictionsQuestion.jsx",
+    "app/Questions/AllergiesQuestion.jsx",
+    "app/Dashboard/Calendar.jsx",
+    "app/Dashboard/Dashboard.jsx",
+    "app/Dashboard/ExpandableCard.jsx",
+    "app/IntroScreens/CreateAccScreen.jsx"
+  ]
 }

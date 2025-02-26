@@ -1,10 +1,10 @@
-import React from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { MaterialCommunityIcons } from '@expo/vector-icons'; // Import icon
-import styles from '../styling/DashboardStyle';
-import BottomNavBar from '../BottomNavBar';
+import React from 'react'
+import { useNavigation } from '@react-navigation/native'
+import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { MaterialCommunityIcons } from '@expo/vector-icons' // Import icon
+import styles from '../styling/DashboardStyle'
+import BottomNavBar from '../BottomNavBar'
 
 const medications = [
   {
@@ -15,7 +15,7 @@ const medications = [
     frequency: '2x Daily',
     reminders: ['6:00a - 8:30a', '5:00p - 7:00p'],
     image: require('../../assets/images/aspirin.png'),
-    backgroundColor: '#F8C5C1', 
+    backgroundColor: '#F8C5C1'
   },
   {
     id: '2',
@@ -25,23 +25,23 @@ const medications = [
     frequency: '1x Daily',
     reminders: ['5:00p - 7:00p'],
     image: require('../../assets/images/omeprazole.png'),
-    backgroundColor: '#A7E8F3', 
-  },
-];
+    backgroundColor: '#A7E8F3'
+  }
+]
 
 export default function Dashboard() {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
 
   const handleEditReminder = (medication) => {
-    console.log(`Editing reminders for medication: ${medication.name}`);
+    console.log(`Editing reminders for medication: ${medication.name}`)
     navigation.navigate('EditIntention', {
       medicationName: medication.name,
       dosage: medication.dosage,
       brand: medication.brand,
       frequency: medication.frequency,
-      reminders: medication.reminders,
-    });
-  };
+      reminders: medication.reminders
+    })
+  }
 
   return (
     <SafeAreaView style={styles.safeContainer}>
@@ -49,7 +49,10 @@ export default function Dashboard() {
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.title}>Dashboard</Text>
-          <Image source={require('../../assets/images/pill.png')} style={styles.icon} />
+          <Image
+            source={require('../../assets/images/pill.png')}
+            style={styles.icon}
+          />
         </View>
 
         {/* Weekly Summary */}
@@ -79,22 +82,33 @@ export default function Dashboard() {
                   <View>
                     <Text style={styles.remindersTitle}>Reminders</Text>
                     {item.reminders.map((time, index) => (
-                      <Text key={index} style={styles.reminderText}>{time}</Text>
+                      <Text key={index} style={styles.reminderText}>
+                        {time}
+                      </Text>
                     ))}
                   </View>
 
                   {/* Edit Reminder Button */}
-                  <TouchableOpacity 
-                    onPress={() => handleEditReminder(item)} 
+                  <TouchableOpacity
+                    onPress={() => handleEditReminder(item)}
                     style={styles.editButton}
                   >
-                    <MaterialCommunityIcons name="pencil" size={20} color="#555" />
+                    <MaterialCommunityIcons
+                      name="pencil"
+                      size={20}
+                      color="#555"
+                    />
                   </TouchableOpacity>
                 </View>
               </View>
 
               {/* Medication Image (with background) */}
-              <View style={[styles.medicationImageContainer, { backgroundColor: item.backgroundColor }]}>
+              <View
+                style={[
+                  styles.medicationImageContainer,
+                  { backgroundColor: item.backgroundColor }
+                ]}
+              >
                 <Image source={item.image} style={styles.medicationImage} />
               </View>
             </View>
@@ -105,5 +119,5 @@ export default function Dashboard() {
         <BottomNavBar />
       </View>
     </SafeAreaView>
-  );
+  )
 }

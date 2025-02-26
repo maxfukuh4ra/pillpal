@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   navBar: {
@@ -16,23 +16,22 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     position: 'absolute',
     bottom: 0,
-    width: '100%',
-    
+    width: '100%'
   },
   navButton: {
     alignItems: 'center',
     flex: 1,
-    paddingVertical: 8,
+    paddingVertical: 8
   },
   navText: {
     fontSize: 12,
     color: '#555',
-    marginTop: 2,
+    marginTop: 2
   },
   activeNavText: {
     fontWeight: 'bold',
-    color: '#E5989B',
-  },
-});
+    color: '#E5989B'
+  }
+})
 
-export default styles;
+export default styles

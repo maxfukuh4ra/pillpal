@@ -1,9 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
-import styles from '../styling/QuestionStyle';
+import React, { useState, useEffect } from 'react'
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ScrollView
+} from 'react-native'
+import styles from '../styling/QuestionStyle'
 
-export default function MedicationDetailsQuestion({ medicationCount, onNext, onBack }) {
-  const [medications, setMedications] = useState([]);
+export default function MedicationDetailsQuestion({
+  medicationCount,
+  onNext,
+  onBack
+}) {
+  const [medications, setMedications] = useState([])
 
   useEffect(() => {
     if (typeof medicationCount === 'number' && medicationCount > 0) {
@@ -12,19 +22,19 @@ export default function MedicationDetailsQuestion({ medicationCount, onNext, onB
           name: '',
           timesPerDay: ''
         }))
-      );
+      )
     }
-  }, [medicationCount]);
+  }, [medicationCount])
 
   const handleChange = (index, field, value) => {
-    const updatedMedications = [...medications];
-    updatedMedications[index][field] = value;
-    setMedications(updatedMedications);
-  };
+    const updatedMedications = [...medications]
+    updatedMedications[index][field] = value
+    setMedications(updatedMedications)
+  }
 
   const handleNext = () => {
-    onNext('medications', medications);
-  };
+    onNext('medications', medications)
+  }
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -52,13 +62,17 @@ export default function MedicationDetailsQuestion({ medicationCount, onNext, onB
                 placeholder="e.g. 2"
                 value={med.timesPerDay}
                 keyboardType="numeric"
-                onChangeText={(value) => handleChange(index, 'timesPerDay', value)}
+                onChangeText={(value) =>
+                  handleChange(index, 'timesPerDay', value)
+                }
               />
             </View>
           </View>
         ))
       ) : (
-        <Text style={styles.errorText}>Invalid medication count. Please go back and enter a number.</Text>
+        <Text style={styles.errorText}>
+          Invalid medication count. Please go back and enter a number.
+        </Text>
       )}
 
       <View style={styles.navigationContainer}>
@@ -66,14 +80,14 @@ export default function MedicationDetailsQuestion({ medicationCount, onNext, onB
           <Text style={styles.nextButtonText}>Back</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity 
-          onPress={handleNext} 
-          style={styles.navigationButton} 
-          disabled={medications.some(med => !med.name || !med.timesPerDay)}
+        <TouchableOpacity
+          onPress={handleNext}
+          style={styles.navigationButton}
+          disabled={medications.some((med) => !med.name || !med.timesPerDay)}
         >
           <Text style={styles.nextButtonText}>Next</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
-  );
+  )
 }

@@ -1,17 +1,21 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from 'react'
+import { View, Text, StyleSheet } from 'react-native'
 
 export default function ProgressBar({ currentStep, totalSteps }) {
-  const progressPercentage = (currentStep / totalSteps) * 100;
+  const progressPercentage = (currentStep / totalSteps) * 100
 
   return (
     <View style={styles.container}>
-      <Text style={styles.progressText}>Step {currentStep} of {totalSteps}</Text>
+      <Text style={styles.progressText}>
+        Step {currentStep} of {totalSteps}
+      </Text>
       <View style={styles.progressBarContainer}>
-        <View style={[styles.progressBar, { width: `${progressPercentage}%` }]} />
+        <View
+          style={[styles.progressBar, { width: `${progressPercentage}%` }]}
+        />
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -19,23 +23,23 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     marginBottom: 10,
-    marginTop: 50,
+    marginTop: 50
   },
   progressText: {
     color: '#ffffff',
     fontSize: 16,
     fontFamily: 'raleway-bold',
-    marginBottom: 10,
+    marginBottom: 10
   },
   progressBarContainer: {
     width: '90%',
     height: 8,
     backgroundColor: '#2c2c2e',
     borderRadius: 4,
-    overflow: 'hidden',
+    overflow: 'hidden'
   },
   progressBar: {
     height: '100%',
-    backgroundColor: '#49F2E3',
-  },
-});
+    backgroundColor: '#49F2E3'
+  }
+})

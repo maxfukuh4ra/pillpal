@@ -1,21 +1,23 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { format, addDays, startOfWeek } from 'date-fns';
-// format is used to format dates into readable string 
+import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { format, addDays, startOfWeek } from 'date-fns'
+// format is used to format dates into readable string
 // addDays is for adding certain number of days to a date --> addDays(date, #)
-// startOfWeek returns start date of the week for a given date 
+// startOfWeek returns start date of the week for a given date
 
 import styles from '../styling/CalendarStyle'
 
 export default function Calendar() {
   // get the current date using Date object
-  const currentDate = new Date();
+  const currentDate = new Date()
   // get the start of the week given a date (which is Sunday --> mapped to 0 by JS)
-  const startOfTheWeek = startOfWeek(currentDate, { weekStartsOn: 0 });
-  // creates array of 7 
+  const startOfTheWeek = startOfWeek(currentDate, { weekStartsOn: 0 })
+  // creates array of 7
   // _ represents current element (not used) and i is the index from 0-6
-  // addDays computes date for each day of the week from startOfTheWeek so it does 
-  const weekDates = Array.from({ length: 7 }, (_, i) => addDays(startOfTheWeek, i));
+  // addDays computes date for each day of the week from startOfTheWeek so it does
+  const weekDates = Array.from({ length: 7 }, (_, i) =>
+    addDays(startOfTheWeek, i)
+  )
 
   return (
     <View style={styles.calendarContainer}>
@@ -27,7 +29,7 @@ export default function Calendar() {
         </TouchableOpacity>
       </View>
       <View style={styles.weekContainer}>
-         {/* 
+        {/* 
          weekDates is an array that holds dates for the current week.
          the map function iterates over each date 
          */}
@@ -49,7 +51,9 @@ export default function Calendar() {
             <Text
               style={[
                 styles.dateText,
-                currentDate.getDate() === date.getDate() ? styles.currentDateText : null,
+                currentDate.getDate() === date.getDate()
+                  ? styles.currentDateText
+                  : null
               ]}
             >
               {format(date, 'd')}
@@ -58,5 +62,5 @@ export default function Calendar() {
         ))}
       </View>
     </View>
-  );
+  )
 }

@@ -1,67 +1,63 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native'; 
-import { useNavigation } from '@react-navigation/native';  
-import styles from '../styling/QuestionStyle';
+import React, { useState } from 'react'
+import { View, Text, TextInput, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import styles from '../styling/QuestionStyle'
 
 export default function EmailPassword({ onNext }) {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const navigation = useNavigation();  
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const navigation = useNavigation()
 
-    const handleNext = () => {
-        // Pass both email and password together in one update
-        const combinedData = {
-          email: email,
-          password: password
-        };
-      
-        // Update the responses object all at once
-        onNext('credentials', combinedData);
-      };
-      
+  const handleNext = () => {
+    // Pass both email and password together in one update
+    const combinedData = {
+      email: email,
+      password: password
+    }
 
-    const handleBack = () => {
-        navigation.navigate('LoginScreen');  
-    };
+    // Update the responses object all at once
+    onNext('credentials', combinedData)
+  }
 
-    return (
-        <View style={styles.container}>
-            <Text style={styles.header}>Enter your Email and Password:</Text>
-            
-            <TextInput
-                style={styles.input}
-                placeholder="Email"
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="email-address"
-                autoCapitalize="none"
-            />
-    
-            <TextInput
-                style={styles.input}
-                placeholder="Password"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry={true}
-                autoCapitalize="none"
-            />
-    
-            <View style={styles.navigationContainer}>
-                <TouchableOpacity
-                    onPress={handleBack}
-                    style={styles.navigationButton}
-                >
-                    <Text style={styles.nextButtonText}>Back</Text>
-                </TouchableOpacity>
-    
-                <TouchableOpacity
-                    onPress={handleNext}
-                    style={styles.navigationButton}
-                    disabled={!email || !password}  // disable button if email or password is empty
-                >
-                    <Text style={styles.nextButtonText}>Next</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    );
+  const handleBack = () => {
+    navigation.navigate('LoginScreen')
+  }
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.header}>Enter your Email and Password:</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry={true}
+        autoCapitalize="none"
+      />
+
+      <View style={styles.navigationContainer}>
+        <TouchableOpacity onPress={handleBack} style={styles.navigationButton}>
+          <Text style={styles.nextButtonText}>Back</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={handleNext}
+          style={styles.navigationButton}
+          disabled={!email || !password} // disable button if email or password is empty
+        >
+          <Text style={styles.nextButtonText}>Next</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  )
 }
