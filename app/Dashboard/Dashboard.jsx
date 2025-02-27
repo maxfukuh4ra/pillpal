@@ -8,29 +8,6 @@ import { doc, getDoc } from 'firebase/firestore';
 import styles from '../styling/DashboardStyle';
 import BottomNavBar from '../BottomNavBar';
 
-// const medications = [
-//   {
-//     id: '1',
-//     name: 'Aspirin',
-//     dosage: 'ASS, 500mg',
-//     brand: 'BAYER, coated pills',
-//     frequency: '2x Daily',
-//     reminders: ['6:00a - 8:30a', '5:00p - 7:00p'],
-//     image: require('../../assets/images/aspirin.png'),
-//     backgroundColor: '#F8C5C1'
-//   },
-//   {
-//     id: '2',
-//     name: 'Omeprazole',
-//     dosage: 'Prilosec, 20mg',
-//     brand: 'AstraZeneca, capsule',
-//     frequency: '1x Daily',
-//     reminders: ['5:00p - 7:00p'],
-//     image: require('../../assets/images/omeprazole.png'),
-//     backgroundColor: '#A7E8F3'
-//   }
-// ]
-
 
 export default function Dashboard() {
   const navigation = useNavigation();

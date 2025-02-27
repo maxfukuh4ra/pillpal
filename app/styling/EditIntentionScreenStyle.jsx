@@ -1,64 +1,56 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
+  safeContainer: {
     flex: 1,
     backgroundColor: '#3c324a',
-    padding: 20,
   },
-  backButton: {
-    marginBottom: 10,
+  container: {
+    flex: 1, 
+    backgroundColor: '#3c324a',
+    paddingHorizontal: 20,
+    paddingTop: 10,
+    justifyContent: 'space-between',
+  },
+  contentContainer: {
+    flex: 1, 
   },
   header: {
     color: 'white',
     fontSize: 26,
     fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  subHeader: {
-    color: '#f4a9a3',
-    fontStyle: 'italic',
-    fontSize: 16,
-    marginBottom: 20,
+    marginTop: 20, 
   },
   medicationContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    marginTop: 10, 
   },
   medicationInfo: {
     marginLeft: 10,
-  },
-  medicationTitle: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 5,
   },
   medicationName: {
     color: 'white',
     fontWeight: 'bold',
     fontSize: 16,
+    marginLeft: 10,
+    paddingTop: 50
   },
   medicationDetails: {
     color: '#f4a9a3',
-    fontSize: 14,
-  },
-  medicationDaysLeft: {
-    color: '#7dcfb6',
     fontSize: 14,
   },
   reminderHeader: {
     color: 'white',
     fontWeight: 'bold',
     fontSize: 16,
-    marginBottom: 10,
+    marginTop: 10, 
   },
   reminderRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 15,
+    marginTop: 20,
     width: '100%',
   },
   text: {
@@ -79,12 +71,15 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     paddingVertical: 12,
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 30,
   },
   saveButtonText: {
     color: 'black',
     fontWeight: 'bold',
     fontSize: 16,
+  },
+  bottomNavContainer: {
+    marginBottom: 0, // Ensures it sits at the very bottom
   },
 });
 
