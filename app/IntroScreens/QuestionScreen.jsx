@@ -31,26 +31,10 @@ export default function QuestionScreen() {
     console.log(updatedResponses.password)
 
     if (currentStep + 1 >= totalSteps) {
-      try {
-        const email = updatedResponses.credentials?.email
-        const password = updatedResponses.credentials?.password
-
-        // Create user account
-        const response = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        )
-        console.log('✅ Account Created Successfully')
-
-        // Navigate to Dashboard only after successful account creation
         navigation.replace('Dashboard')
-      } catch (error) {
-        alert('Error creating account. Please try again.')
-        console.error('❌ Error creating account: ', error.message)
       }
-    } else {
-      setCurrentStep(currentStep + 1) // Move to the next question
+    else {
+      setCurrentStep(currentStep + 1)
     }
   }
 

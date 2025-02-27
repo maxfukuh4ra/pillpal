@@ -4,6 +4,9 @@ import * as Location from 'expo-location'
 import * as Notifications from 'expo-notifications'
 import styles from '../styling/QuestionStyle'
 import { submitUserData } from '../services/SubmitUserData'
+import { setDoc, doc } from 'firebase/firestore';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { FIREBASE_DB, FIREBASE_AUTH } from '../../firebaseconfig';
 
 export default function PrivacyQuestion({ onNext, onBack, userData }) {
   const [locationStatus, setLocationStatus] = useState(null)
@@ -63,17 +66,55 @@ export default function PrivacyQuestion({ onNext, onBack, userData }) {
     }
   }
 
-  const handleSubmit = async () => {
-    console.log('User data received in PrivacyQuestion: ', userData)
+  // const handleSubmit = async () => {
+  //   console.log('User data received in PrivacyQuestion: ', userData)
 
-    // flatten nested objects before submitting to Firestore
+  //   // flatten nested objects before submitting to Firestore
+  //   const finalUserData = {
+  //     email: userData.credentials?.email,
+  //     password: userData.credentials?.password,
+  //     name: userData.nameBirthday?.name,
+  //     birthday: userData.nameBirthday?.birthday,
+  //     medicationCount: userData.medicationCount,
+  //     medications: userData.medications,
+  //     location: location
+  //       ? {
+  //           latitude: location.latitude,
+  //           longitude: location.longitude
+  //         }
+  //       : null,
+  //     notificationsEnabled: notificationStatus === 'granted',
+  //     locationPermissionGranted: locationStatus === 'granted'
+  //   }
+
+  //   try {
+  //     await submitUserData(finalUserData) // call the function to send flattened data to Firestore
+  //     console.log('User data submitted successfully with all responses')
+  //     onNext('permissionsGranted', true) // proceed to the next screen
+  //   } catch (error) {
+  //     console.error('Error submitting user data: ', error)
+  //   }
+  // }
+
+const handleSubmit = async () => {
+  console.log('User data received in PrivacyQuestion: ', userData);
+
+  try {
+    console.log("🚀 Creating user account...");
+    const response = await createUserWithEmailAndPassword(
+      FIREBASE_AUTH,
+      userData.credentials?.email,
+      userData.credentials?.password
+    );
+    const user = response.user;
+    console.log("✅ User created successfully:", user.uid);
+
     const finalUserData = {
       email: userData.credentials?.email,
-      password: userData.credentials?.password,
       name: userData.nameBirthday?.name,
       birthday: userData.nameBirthday?.birthday,
       medicationCount: userData.medicationCount,
-      medications: userData.medications,
+      medications: userData.medications || [],
       location: location
         ? {
             latitude: location.latitude,
@@ -82,16 +123,21 @@ export default function PrivacyQuestion({ onNext, onBack, userData }) {
         : null,
       notificationsEnabled: notificationStatus === 'granted',
       locationPermissionGranted: locationStatus === 'granted'
-    }
+    };
 
-    try {
-      await submitUserData(finalUserData) // call the function to send flattened data to Firestore
-      console.log('User data submitted successfully with all responses')
-      onNext('permissionsGranted', true) // proceed to the next screen
-    } catch (error) {
-      console.error('Error submitting user data: ', error)
-    }
+    console.log("📡 Storing user data in Firestore...");
+    await setDoc(doc(FIREBASE_DB, 'users', user.uid), finalUserData);
+    console.log("✅ User data successfully stored in Firestore.");
+    
+    console.log("🚀 Navigating to Dashboard...");
+    onNext('permissionsGranted', true); 
+
+  } catch (error) {
+    console.error("❌ Error creating user or storing data:", error.message);
+    alert("Error creating account: " + error.message);
   }
+};
+
 
   return (
     <View style={styles.container}>
