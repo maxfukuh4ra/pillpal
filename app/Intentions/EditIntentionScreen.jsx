@@ -10,13 +10,13 @@ import { FIREBASE_DB, FIREBASE_AUTH } from "../../firebaseconfig";
 
 export default function EditIntentionScreen({ route }) {
   const navigation = useNavigation();
-  const { medicationName, dosage, brand, frequency, reminders } = route.params || {};
+  const { medicationName, dosage, brand, frequency, reminders, selectedLocation } = route.params || {};
   const [loading, setLoading] = useState(true);
 
   const [startTime, setStartTime] = useState(reminders?.[0] || '5:30PM');
   const [endTime, setEndTime] = useState(reminders?.[1] || '6:30PM');
   const [distance, setDistance] = useState('50');
-  const [location, setLocation] = useState('Kitchen');
+  const [location, setLocation] = useState(selectedLocation || 'Home');
   const [timeReminderEnabled, setTimeReminderEnabled] = useState(false);
   const [locationReminderEnabled, setLocationReminderEnabled] = useState(false);
 
@@ -61,6 +61,15 @@ export default function EditIntentionScreen({ route }) {
     fetchMedicationData();
   }, [medicationName]);
 
+  useEffect(() => {
+    if (selectedLocation) {
+      setLocation(selectedLocation.place || 'Home');
+      setDistance(selectedLocation.distance || '50');
+    }
+  }, [selectedLocation]);
+  
+  
+
   const handleSave = async () => {
     try {
       const user = FIREBASE_AUTH.currentUser;
@@ -77,7 +86,7 @@ export default function EditIntentionScreen({ route }) {
       }
   
       let userData = userDocSnap.data();
-      let updatedMedications = [...userData.medications]; 
+      let updatedMedications = [...userData.medications];
   
       const medicationIndex = updatedMedications.findIndex(
         (med) => med.name.trim().toLowerCase() === medicationName.trim().toLowerCase()
@@ -90,15 +99,16 @@ export default function EditIntentionScreen({ route }) {
   
       updatedMedications[medicationIndex] = {
         ...updatedMedications[medicationIndex],
-        reminders: timeReminderEnabled ? [startTime, endTime] : [], 
+        reminders: timeReminderEnabled ? [startTime, endTime] : [],
         locationSettings: {
           enabled: locationReminderEnabled,
           distance: locationReminderEnabled ? distance : null,
           place: locationReminderEnabled ? location : null,
+          coordinates: locationReminderEnabled ? selectedLocation?.coordinates || null : null, // Save coordinates
         },
       };
   
-      // push updated data to Firestore
+      // Push updated data to Firestore
       await updateDoc(userDocRef, { medications: updatedMedications });
   
       console.log("✅ Medication updated successfully in Firestore.");
@@ -107,6 +117,7 @@ export default function EditIntentionScreen({ route }) {
       console.error("❌ Error updating medication:", error);
     }
   };
+  
 
   return (
     <SafeAreaView style={styles.safeContainer}>
@@ -144,7 +155,30 @@ export default function EditIntentionScreen({ route }) {
             <Text style={styles.text}>Within</Text>
             <TextInput value={distance} onChangeText={setDistance} style={styles.input} />
             <Text style={styles.text}>ft of</Text>
-            <TextInput value={location} onChangeText={setLocation} style={styles.input} />
+            <TouchableOpacity
+  style={styles.input}
+  onPress={() => {
+    console.log("Navigating to MapPickerScreen with:", { 
+      initialLocation: selectedLocation, 
+      medicationName, 
+      dosage, 
+      brand, 
+      frequency, 
+      reminders 
+    });
+    navigation.navigate('MapPickerScreen', {
+      initialLocation: selectedLocation || { latitude: 37.7749, longitude: -122.4194 }, // Default SF if null
+      medicationName: medicationName || 'Unknown Medication', // Ensure it is always defined
+      dosage: dosage || '',
+      brand: brand || '',
+      frequency: frequency || '',
+      reminders: reminders || [],
+    });
+  }}
+>
+  <Text>{location?.place || 'Select Location'}</Text>
+</TouchableOpacity>
+
             <Switch value={locationReminderEnabled} onValueChange={setLocationReminderEnabled} />
           </View>
 
