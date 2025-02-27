@@ -32,7 +32,6 @@ import BottomNavBar from '../BottomNavBar';
 // ]
 
 
-
 export default function Dashboard() {
   const navigation = useNavigation();
   const [medications, setMedications] = useState([]); 
@@ -41,13 +40,13 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchUserMedications = async () => {
       try {
-        const user = FIREBASE_AUTH.currentUser; // Get logged-in user
+        const user = FIREBASE_AUTH.currentUser; // get logged-in user
         if (!user) {
           console.error("❌ No authenticated user found.");
           return;
         }
   
-        console.log("✅ Logged-in user UID:", user.uid); // Log UID for debugging
+        console.log("✅ Logged-in user UID:", user.uid); // log UID for debugging
   
         const userDocRef = doc(FIREBASE_DB, 'users', user.uid);
         const userDoc = await getDoc(userDocRef);
@@ -65,7 +64,6 @@ export default function Dashboard() {
         setLoading(false);
       }
     };
-  
     fetchUserMedications();
   }, []);
   

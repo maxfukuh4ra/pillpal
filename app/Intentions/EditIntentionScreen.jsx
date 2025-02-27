@@ -6,15 +6,17 @@ import styles from '../styling/EditIntentionScreenStyle';
 
 export default function EditIntentionScreen({ route }) {
   const navigation = useNavigation();
-  const [startTime, setStartTime] = useState('5:30PM');
-  const [endTime, setEndTime] = useState('6:30PM');
+  const { medicationName, dosage, brand, frequency, reminders } = route.params || {};
+
+  const [startTime, setStartTime] = useState(reminders?.[0] || '5:30PM');
+  const [endTime, setEndTime] = useState(reminders?.[1] || '6:30PM');
   const [distance, setDistance] = useState('50');
   const [location, setLocation] = useState('Kitchen');
   const [timeReminderEnabled, setTimeReminderEnabled] = useState(false);
   const [locationReminderEnabled, setLocationReminderEnabled] = useState(false);
 
   const handleSave = () => {
-    console.log('Updated Intention:', { startTime, endTime, distance, location, timeReminderEnabled, locationReminderEnabled });
+    console.log('Updated Intention:', { medicationName, startTime, endTime, distance, location, timeReminderEnabled, locationReminderEnabled });
     navigation.goBack();
   };
 
@@ -24,16 +26,16 @@ export default function EditIntentionScreen({ route }) {
       <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
         <Ionicons name="arrow-back" size={24} color="white" />
       </TouchableOpacity>
-      <Text style={styles.header}>Add Intention</Text>
-      <Text style={styles.subHeader}>After coming home from work in the evening</Text>
+      <Text style={styles.header}>Edit Intention</Text>
 
       {/* Medication Information */}
       <View style={styles.medicationContainer}>
         <Ionicons name="medkit" size={24} color="yellow" />
         <View style={styles.medicationInfo}>
-          <Text style={styles.medicationName}>Omega 3</Text>
-          <Text style={styles.medicationDetails}>1 tablet after meals</Text>
-          <Text style={styles.medicationDaysLeft}>7 days left</Text>
+          <Text style={styles.medicationName}>{medicationName || 'Unknown Medication'}</Text>
+          <Text style={styles.medicationDetails}>{dosage}</Text>
+          <Text style={styles.medicationDetails}>{brand}</Text>
+          <Text style={styles.medicationFrequency}>{frequency}</Text>
         </View>
       </View>
 

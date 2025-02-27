@@ -35,7 +35,11 @@ export default function Index() {
           component={Dashboard}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="EditIntention" component={EditIntentionScreen} />
+        <Stack.Screen 
+          name="EditIntention" 
+          component={EditIntentionScreen}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   )
