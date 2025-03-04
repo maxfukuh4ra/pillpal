@@ -7,6 +7,7 @@ import LoginScreen from './IntroScreens/LoginScreen';
 import QuestionScreen from './IntroScreens/QuestionScreen';
 import ForgotPasswordScreen from './IntroScreens/ForgotScreen';
 import Dashboard from './Dashboard/Dashboard';
+import MedicationScreen from './Screens/MedicationsScreen';
 import EditIntentionScreen from './Intentions/EditIntentionScreen';
 import MapPickerScreen from './services/MapPickerScreen';
 import { startLocationTracking } from './services/LocationTracking';
@@ -58,6 +59,11 @@ export default function Index() {
          <Stack.Screen
           name="MapPickerScreen"
           component={MapPickerScreen}
+          options={{ headerShown: false }}
+        />
+          <Stack.Screen
+          name="MedicationScreen"
+          component={MedicationScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
