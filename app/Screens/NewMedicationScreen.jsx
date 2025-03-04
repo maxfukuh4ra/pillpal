@@ -140,12 +140,12 @@ export default function NewMedicationScreen() {
                 style={styles.input}
                 onPress={() => navigation.navigate("MapPickerScreen", {
                   initialLocation: location,
-                  returnScreen: "NewMedicationScreen", // Tell MapPicker to return here
-                  // medicationName,
+                  returnScreen: "NewMedicationScreen", 
+                  medicationName,
                   // dosage,
-                  // brand,
-                  // frequency,
-                  // reminders,
+                  brand,
+                  frequency,
+                  reminders,
                 })}
           >
             <Text>{location || 'Select Location'}</Text>
