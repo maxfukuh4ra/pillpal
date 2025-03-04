@@ -55,7 +55,8 @@ export default function MedicationsScreen() {
             <Ionicons name="information-circle-outline" size={24} color="#ff7f7f" />
             <View style={styles.medicationInfo}>
               <Text style={styles.medicationName}>{item.name}</Text>
-              <Text style={styles.medicationDetails}>Implementation Intention + dosage and cadence</Text>
+              <Text style={styles.medicationDetails}> Intention: {item.intention_description} </Text>
+              <Text style={styles.medicationDetails}> Times Per Day: {item.timesPerDay} </Text>
             </View>
             {item.imageUrl && (
               <Image source={{ uri: item.imageUrl }} style={styles.medicationImage} />
