@@ -11,7 +11,7 @@ import EditIntentionScreen from './Intentions/EditIntentionScreen';
 import MapPickerScreen from './services/MapPickerScreen';
 import { startLocationTracking } from './services/LocationTracking';
 
-// Configure notifications to display while the app is running
+// config notifications to display while the app is running
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -24,7 +24,7 @@ const Stack = createStackNavigator();
 
 export default function Index() {
   useEffect(() => {
-    startLocationTracking();  // Start tracking location in the background
+    startLocationTracking();  // start when app starts
   }, []);
 
   return (

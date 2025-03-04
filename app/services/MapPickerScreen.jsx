@@ -38,21 +38,21 @@ export default function MapPickerScreen() {
   };
 
   const handleConfirmLocation = () => {
-    console.log("Returning to EditIntention with:", { 
-      selectedLocation, 
-      medicationName: route.params?.medicationName, 
-      dosage: route.params?.dosage, 
-      brand: route.params?.brand, 
-      frequency: route.params?.frequency, 
-      reminders: route.params?.reminders 
-    });
+    // console.log("Returning to EditIntention with:", { 
+    //   selectedLocation, 
+    //   medicationName: route.params?.medicationName, 
+    //   dosage: route.params?.dosage, 
+    //   brand: route.params?.brand, 
+    //   frequency: route.params?.frequency, 
+    //   reminders: route.params?.reminders 
+    // });
   
     navigation.navigate('EditIntention', {
       selectedLocation: {
         place: 'Selected Location',
         coordinates: selectedLocation,
       },
-      medicationName: route.params?.medicationName || 'Unknown Medication', // Ensure it’s passed back
+      medicationName: route.params?.medicationName || 'Unknown Medication', // ensure it’s passed back
       dosage: route.params?.dosage || '',
       brand: route.params?.brand || '',
       frequency: route.params?.frequency || '',

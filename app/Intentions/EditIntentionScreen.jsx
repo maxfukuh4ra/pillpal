@@ -167,8 +167,8 @@ export default function EditIntentionScreen({ route }) {
       reminders 
     });
     navigation.navigate('MapPickerScreen', {
-      initialLocation: selectedLocation || { latitude: 37.7749, longitude: -122.4194 }, // Default SF if null
-      medicationName: medicationName || 'Unknown Medication', // Ensure it is always defined
+      initialLocation: selectedLocation || { latitude: 37.7749, longitude: -122.4194 }, 
+      medicationName: medicationName || 'Unknown Medication',
       dosage: dosage || '',
       brand: brand || '',
       frequency: frequency || '',
