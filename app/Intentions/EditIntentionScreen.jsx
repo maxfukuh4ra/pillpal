@@ -19,6 +19,7 @@ export default function EditIntentionScreen({ route }) {
   const [location, setLocation] = useState(selectedLocation || 'Home');
   const [timeReminderEnabled, setTimeReminderEnabled] = useState(false);
   const [locationReminderEnabled, setLocationReminderEnabled] = useState(false);
+  const [intentionDescription, setIntentionDescription] = useState('');
 
   // fetch reminder data from firestore
   useEffect(() => {
@@ -50,6 +51,7 @@ export default function EditIntentionScreen({ route }) {
           setLocation(medication.locationSettings?.place || 'Kitchen');
           setTimeReminderEnabled(medication.reminders !== undefined);
           setLocationReminderEnabled(medication.locationSettings?.enabled || false);
+          setIntentionDescription(medication.intention_description || '');
         }
         setLoading(false);
       } catch (error) {
@@ -106,6 +108,7 @@ export default function EditIntentionScreen({ route }) {
           place: locationReminderEnabled ? location : null,
           coordinates: locationReminderEnabled ? selectedLocation?.coordinates || null : null, // Save coordinates
         },
+        intention_description: intentionDescription,
       };
   
       // Push updated data to Firestore
@@ -140,6 +143,19 @@ export default function EditIntentionScreen({ route }) {
               <Text style={styles.medicationFrequency}>{frequency}</Text>
             </View>
           </View>
+
+          {/* Intention Description Input */}
+          <View style={styles.inputContainer}>
+            <Text style={styles.text}>Intention Description:</Text>
+            <TextInput
+              value={intentionDescription}
+              onChangeText={setIntentionDescription}
+              placeholder="e.g., Before dinner"
+              placeholderTextColor="#aaa"
+              style={styles.input}
+            />
+          </View>
+
 
           {/* Reminder Settings */}
           <Text style={styles.reminderHeader}>Remind Me:</Text>

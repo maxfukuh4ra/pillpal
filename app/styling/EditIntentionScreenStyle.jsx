@@ -81,6 +81,19 @@ const styles = StyleSheet.create({
   bottomNavContainer: {
     marginBottom: 0, // Ensures it sits at the very bottom
   },
+  inputContainer: {
+    marginBottom: 15,
+  },
+  input: {
+    backgroundColor: 'white',
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    borderRadius: 8,
+    fontSize: 16,
+    color: 'black',
+    marginTop: 5,
+  },
+  
 });
 
 export default styles;
