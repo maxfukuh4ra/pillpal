@@ -69,7 +69,7 @@ export default function MedicationsScreen() {
       />
 
       {/* Floating Add Button */}
-      <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('AddMedication')}>
+      <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('NewMedicationScreen')}>
         <Ionicons name="add" size={32} color="white" />
       </TouchableOpacity>
 
