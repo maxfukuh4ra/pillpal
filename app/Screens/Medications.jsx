@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { View, Text, FlatList, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { doc, getDoc } from "firebase/firestore";
 import { FIREBASE_DB, FIREBASE_AUTH } from "../../firebaseconfig";
+import BottomNavBar from '../BottomNavBar';
 import styles from '../styling/MedicationsScreenStyle';
 
 export default function MedicationsScreen() {
@@ -44,6 +46,7 @@ export default function MedicationsScreen() {
   }
 
   return (
+    <SafeAreaView style={styles.safeContainer}>
     <View style={styles.container}>
       <Text style={styles.header}>Your Medications</Text>
       
@@ -69,6 +72,9 @@ export default function MedicationsScreen() {
       <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('AddMedication')}>
         <Ionicons name="add" size={32} color="white" />
       </TouchableOpacity>
+
+      <BottomNavBar />
     </View>
+    </SafeAreaView>
   );
 }

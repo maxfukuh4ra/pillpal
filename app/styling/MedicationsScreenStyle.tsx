@@ -1,13 +1,18 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+  safeContainer: {
+    flex: 1,
+    backgroundColor: '#413D51'
+  },
   container: {
     flex: 1,
     backgroundColor: '#3c324a',
-    paddingTop: 80,
+    paddingTop: 40,
     justifyContent: 'space-between',
   },
   header: {
+    marginLeft: 20,
     fontSize: 22,
     fontWeight: 'bold',
     color: 'white',
@@ -20,6 +25,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     marginBottom: 10,
+    
   },
   medicationInfo: {
     flex: 1,
@@ -41,7 +47,7 @@ const styles = StyleSheet.create({
   },
   addButton: {
     position: 'absolute',
-    bottom: 30,
+    bottom: 100,
     right: 20,
     backgroundColor: '#ff7f7f',
     padding: 15,
