@@ -143,9 +143,9 @@ export default function NewMedicationScreen() {
                   returnScreen: "NewMedicationScreen", 
                   medicationName,
                   // dosage,
-                  brand,
+                  // brand,
                   frequency,
-                  reminders,
+                  // reminders,
                 })}
           >
             <Text>{location || 'Select Location'}</Text>
