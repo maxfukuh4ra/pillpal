@@ -34,21 +34,20 @@ export default function Index() {
 
     const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, async (user) => {
       if (!user) {
-        console.log("❌ No user is logged in. Skipping activity tracking.");
+        console.log("❌ No user is logged in yet. Skipping activity tracking.");
         return;
       }
-
-      console.log("✅ User is logged in:", user.uid);
-
-      const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
-      console.log(`📅 Today's date: ${today}`);
-
-      const userDocRef = doc(FIREBASE_DB, 'users', user.uid);
-      console.log(`🔍 Fetching document for user UID: ${user.uid}`);
-
+    
+      // debugging
+      // console.log("✅ User is logged in:", user.uid);
+      // const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+      // console.log(`📅 Today's date: ${today}`);
+      // const userDocRef = doc(FIREBASE_DB, 'users', user.uid);
+      // console.log(`🔍 Fetching document for user UID: ${user.uid}`);
+    
+      // fetch data from db
       try {
         const userDoc = await getDoc(userDocRef);
-
         let activityDays = {};
         if (userDoc.exists()) {
           activityDays = userDoc.data().activityDays || {};
@@ -56,31 +55,37 @@ export default function Index() {
         } else {
           console.log("⚠️ User document does not exist. Creating a new user document.");
           
-          // If user document doesn't exist, create it with activityDays
+          // if user document doesn't exist, create it with activityDays
           await setDoc(userDocRef, { activityDays: {} }, { merge: true });
           console.log("🆕 Created a new user document with activityDays.");
         }
-
-        // Check if today's date is already logged
-        if (activityDays[today]) {
-          console.log(`🟢 Activity already logged for today (${today}). No update needed.`);
-        } else {
+    
+        // change past dates to green
+        Object.keys(activityDays).forEach(date => {
+          if (date !== today) {
+            activityDays[date].selectedColor = '#66BB6A';
+          }
+        });
+    
+        // log todays date if not present, using light blue
+        if (!activityDays[today]) {
           console.log(`🔵 Logging new activity for today (${today}).`);
-          activityDays[today] = { selected: true, selectedColor: '#B3E5FC' }; // Light blue for today
-
-          await setDoc(userDocRef, { activityDays }, { merge: true });
-          console.log("✅ Successfully logged today's activity:", activityDays);
+          activityDays[today] = { selected: true, selectedColor: '#B3E5FC' }; 
         }
-
-        // 🔄 Confirm if activityDays is saved in Firestore
+    
+        // save and send to backend 
+        await setDoc(userDocRef, { activityDays }, { merge: true });
+        console.log("✅ Successfully logged today's activity:", activityDays);
+    
+        // debugging
         const updatedDoc = await getDoc(userDocRef);
         console.log("🔄 Post-update Firestore document:", updatedDoc.data());
-
+    
       } catch (error) {
         console.error("❌ Error fetching or updating Firestore document:", error);
       }
     });
-
+    
     return () => unsubscribe(); // Cleanup listener when component unmounts
   }, []);
 

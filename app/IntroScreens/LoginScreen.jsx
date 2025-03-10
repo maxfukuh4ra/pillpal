@@ -51,7 +51,7 @@ export default function LoginScreen({ navigation }) {
   return (
     <View style={LoginStyles.container}>
       <Image
-        source={require('../../assets/images/pill.png')} // Replace with the actual path to your image
+        source={require('../../assets/images/pill.png')} 
         style={LoginStyles.image}
       />
       <Text style={LoginStyles.header}>
